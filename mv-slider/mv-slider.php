@@ -14,7 +14,7 @@
  * Domain Path: /languages
  */
 
-/*
+ /*
 MV Slider is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 2 of the License, or
@@ -43,6 +43,11 @@ if( ! class_exists( 'MV_Slider' ) ){
 
             require_once( MV_SLIDER_PATH . 'class.mv-slider-settings.php' );
             $MV_Slider_Settings = new MV_Slider_Settings();
+            
+            require_once( MV_SLIDER_PATH . 'shortcodes/class.mv-slider-shortcode.php');
+            $MV_Slider_Shortcode = new MV_Slider_Shortcode();
+
+
         }
 
         public function define_constants(){
@@ -93,9 +98,9 @@ if( ! class_exists( 'MV_Slider' ) ){
                 null,
                 null
             );
+
         }
 
-<<<<<<< HEAD
         public function mv_slider_settings_page(){
             if( ! current_user_can( 'manage_options' ) ){
                 return;
@@ -108,18 +113,6 @@ if( ! class_exists( 'MV_Slider' ) ){
             settings_errors( 'mv_slider_options' );
 
             require( MV_SLIDER_PATH . 'views/settings-page.php' );
-=======
-        public function mv_slider_settings_page()
-        {
-            if(!current_user_can('magane_options')){
-                return;
-            }
-            if(isset($_GET['settings-updated'])){
-                add_settings_error('mv_slider_options','mv_slider_message','Settings Saved', 'sucess');
-            }
-            settings_errors('mv_slider_options');
-            require (MV_SLIDER_PATH . 'views/settings-page.php'); 
->>>>>>> 5bca75335da4ce52ff189a3e9c34ee5f77d3a034
         }
 
     }

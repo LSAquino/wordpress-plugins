@@ -12,7 +12,7 @@ if( ! class_exists( 'MV_Slider_Settings' )){
 
         public function admin_init(){
             
-            register_setting( 'mv_slider_group', 'mv_slider_options', array($this, 'mv_slider_validate') );
+            register_setting( 'mv_slider_group', 'mv_slider_options', array( $this, 'mv_slider_validate' ) );
 
             add_settings_section(
                 'mv_slider_main_section',
@@ -136,7 +136,7 @@ if( ! class_exists( 'MV_Slider_Settings' )){
                 switch ($key){
                     case 'mv_slider_title':
                         if( empty( $value )){
-                            add_settings_error('mv_slider_options','mv_slider_message','The title field can not be left empty'. 'error');
+                            add_settings_error( 'mv_slider_options', 'mv_slider_message', 'The title field can not be left empty', 'error' );
                             $value = 'Please, type some text';
                         }
                         $new_input[$key] = sanitize_text_field( $value );
