@@ -48,8 +48,7 @@ if( ! class_exists( 'MV_Slider' ) ){
             $MV_Slider_Shortcode = new MV_Slider_Shortcode();
 
             add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ), 999 );
-            add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts' ), 999 );
-            
+            add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts') );
         }
 
         public function define_constants(){
@@ -126,8 +125,8 @@ if( ! class_exists( 'MV_Slider' ) ){
 
         public function register_admin_scripts(){
             global $typenow;
-            if($typenow=='mv-slider'){
-                wp_enqueue_style('mv-slider-admin', MV_SLIDER_URL . 'assets/css/admin.css');
+            if( $typenow == 'mv-slider'){
+                wp_enqueue_style( 'mv-slider-admin', MV_SLIDER_URL . 'assets/css/admin.css' );
             }
         }
 
