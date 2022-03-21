@@ -8,8 +8,7 @@ if( ! class_exists( 'MV_Testimonials_Post_Type' ) ){
             add_action( 'init', array( $this, 'create_post_type' ) );
 
             add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
-
-            add_action('save_post', array($this, 'save_post'));
+            add_action( 'save_post', array( $this, 'save_post' ) );
         }
 
         public function create_post_type(){
@@ -88,5 +87,5 @@ if( ! class_exists( 'MV_Testimonials_Post_Type' ) ){
                 update_post_meta( $post_id, 'mv_testimonials_user_url', esc_url_raw( $new_user_url ), $old_user_url );
             }            
         }
-    }   
-}  
+    }  
+}
