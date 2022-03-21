@@ -8,7 +8,7 @@
 * Requires at least: 5.6
 * Requires PHP: 7.0
 * Author: Lucas Aquino
-* Author URI: https://www.codigowp.net
+* Author URI: #
 * License: GPL v2 or later
 * License URI: https://www.gnu.org/licenses/gpl-2.0.html
 * Text Domain: mv-testimonials
