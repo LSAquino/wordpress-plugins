@@ -39,6 +39,8 @@ if( !class_exists( 'MV_Testimonials' ) ){
 
         public function __construct() {
 
+            $this->load_textdomain();
+
             // Define constants used througout the plugin
             $this->define_constants(); 
             
@@ -91,6 +93,14 @@ if( !class_exists( 'MV_Testimonials' ) ){
             return $file;
         }
 
+        public function load_textdomain(){
+            load_plugin_textdomain(
+                'mv-testimonials',
+                false,
+                dirname( plugin_basename( __FILE__ ) ) . '/languages/'
+            );
+        }
+
         /**
          * Activate the plugin
          */
@@ -110,7 +120,20 @@ if( !class_exists( 'MV_Testimonials' ) ){
          * Uninstall the plugin
          */
         public static function uninstall(){
+            
+            delete_option( 'widget_mv-tetimonials' );
 
+            $posts = get_posts(
+                array(
+                    'post_type' => 'mv-testimonials',
+                    'number_posts'  => -1,
+                    'post_status'   => 'any'
+                )
+            );
+
+            foreach( $posts as $post ){
+                wp_delete_post( $post->ID, true );
+            }
         }
 
     }
