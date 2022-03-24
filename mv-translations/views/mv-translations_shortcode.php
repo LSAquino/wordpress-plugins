@@ -1,5 +1,10 @@
 <?php
 
+if( ! is_user_logged_in() ){
+    mvt_register_user();
+    return;
+}
+
 if( isset( $_POST['mv_translations_nonce'] ) ){
     if( ! wp_verify_nonce( $_POST['mv_translations_nonce'], 'mv_translations_nonce' ) ){
         return;
@@ -67,17 +72,17 @@ if( isset( $_POST['submitted'])){
         ?>
         
         <label for="mv_translations_title"><?php esc_html_e( 'Title', 'mv-translations' ); ?> *</label>
-        <input type="text" name="mv_translations_title" id="mv_translations_title" value="<?php if(isset($title)) echo $title; ?>" required />
+        <input type="text" name="mv_translations_title" id="mv_translations_title" value="<?php if( isset( $title ) ) echo $title; ?>" required />
         <br />
         <label for="mv_translations_singer"><?php esc_html_e( 'Singer', 'mv-translations' ); ?> *</label>
-        <input type="text" name="mv_translations_singer" id="mv_translations_singer" value="<?php if(isset($singer)) echo $singer; ?>" required />
+        <input type="text" name="mv_translations_singer" id="mv_translations_singer" value="<?php if( isset( $singer ) ) echo $singer; ?>" required />
 
         <br />
-        <?php
-        if (isset($content)){
-            wp_editor( $content, 'mv_translations_content', array( 'wpautop' => true, 'media_buttons' => true ) ); 
+        <?php 
+        if( isset( $content )){
+            wp_editor( $content, 'mv_translations_content', array( 'wpautop' => true, 'media_buttons' => false ) );
         }else{
-            wp_editor( '', 'mv_translations_content', array( 'wpautop' => true, 'media_buttons' => true ) ); 
+            wp_editor( '', 'mv_translations_content', array( 'wpautop' => true, 'media_buttons' => false ) );
         }
         ?>
         </br />
@@ -85,11 +90,11 @@ if( isset( $_POST['submitted'])){
         <fieldset id="additional-fields">
             <label for="mv_translations_transliteration"><?php esc_html_e( 'Has transliteration?', 'mv-translations' ); ?></label>
             <select name="mv_translations_transliteration" id="mv_translations_transliteration">
-                <option value="Yes" <?php if(isset($transliteration)) selected($transliteration, "Yes"); ?>><?php esc_html_e( 'Yes', 'mv-translations' ); ?></option>
-                <option value="No" <?php if(isset($transliteration)) selected($transliteration, "No"); ?>><?php esc_html_e( 'No', 'mv-translations' ); ?></option>
+                <option value="Yes" <?php if( isset( $transliteration ) ) selected( $transliteration, "Yes" ); ?>><?php esc_html_e( 'Yes', 'mv-translations' ); ?></option>
+                <option value="No" <?php if( isset( $transliteration ) ) selected( $transliteration, "No" ); ?>><?php esc_html_e( 'No', 'mv-translations' ); ?></option>
             </select>
             <label for="mv_translations_video_url"><?php esc_html_e( 'Video URL', 'mv-translations' ); ?></label>
-            <input type="url" name="mv_translations_video_url" id="mv_translations_video_url" value="<?php if(isset($video)) echo $video; ?>" />
+            <input type="url" name="mv_translations_video_url" id="mv_translations_video_url" value="<?php if( isset( $video ) ) echo $video; ?>" />
         </fieldset>
         <br />
         <input type="hidden" name="mv_translations_action" value="save">
