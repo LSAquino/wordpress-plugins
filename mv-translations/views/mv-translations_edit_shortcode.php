@@ -44,7 +44,7 @@ if( isset( $_POST['submitted'])){
             'tax_input' => array(
                 'singers'   => sanitize_text_field( $singer )
             ),
-            'ID' => $_GET['post']
+            'ID'    => $_GET['post']
         );
 
         $post_id = wp_update_post( $post_info );
@@ -69,7 +69,7 @@ $q = $wpdb->prepare(
     $current_user->ID
 );
 $results = $wpdb->get_results( $q, ARRAY_A );
-if(current_user_can( 'edit_post', $_GET['post'] )):
+if( current_user_can( 'edit_post', $_GET['post'] )):
 ?>
 <div class="mv-translations">
     <form action="" method="POST" id="translations-form">
@@ -88,10 +88,10 @@ if(current_user_can( 'edit_post', $_GET['post'] )):
         ?>
         
         <label for="mv_translations_title"><?php esc_html_e( 'Title', 'mv-translations' ); ?> *</label>
-        <input type="text" name="mv_translations_title" id="mv_translations_title" value="<?= esc_html($results[0]['post_title']); ?>" required />
+        <input type="text" name="mv_translations_title" id="mv_translations_title" value="<?php echo esc_html( $results[0]['post_title'] ); ?>" required />
         <br />
         <label for="mv_translations_singer"><?php esc_html_e( 'Singer', 'mv-translations' ); ?> *</label>
-        <input type="text" name="mv_translations_singer" id="mv_translations_singer" value="<?= strip_tags(get_the_term_list( $_GET['post'], 'singers', '',', ' ));  ?>" required />
+        <input type="text" name="mv_translations_singer" id="mv_translations_singer" value="<?php echo strip_tags( get_the_term_list( $_GET['post'], 'singers', '', ', ' ) ); ?>" required />
 
         <br />
         <?php 
@@ -103,10 +103,10 @@ if(current_user_can( 'edit_post', $_GET['post'] )):
             <label for="mv_translations_transliteration"><?php esc_html_e( 'Has transliteration?', 'mv-translations' ); ?></label>
             <select name="mv_translations_transliteration" id="mv_translations_transliteration">
                 <option value="Yes" <?php selected( $results[0]['meta_value'], "Yes" ); ?>><?php esc_html_e( 'Yes', 'mv-translations' ); ?></option>
-                <option value="No" <?php  selected( $results[0]['meta_value'], "No" ); ?>><?php esc_html_e( 'No', 'mv-translations' ); ?></option>
+                <option value="No" <?php selected( $results[0]['meta_value'], "No" ); ?>><?php esc_html_e( 'No', 'mv-translations' ); ?></option>
             </select>
             <label for="mv_translations_video_url"><?php esc_html_e( 'Video URL', 'mv-translations' ); ?></label>
-            <input type="url" name="mv_translations_video_url" id="mv_translations_video_url" value="<?php echo $results[1]['meta_value'] ?>" />
+            <input type="url" name="mv_translations_video_url" id="mv_translations_video_url" value="<?php echo $results[1]['meta_value']; ?>" />
         </fieldset>
         <br />
         <input type="hidden" name="mv_translations_action" value="update">
@@ -116,12 +116,11 @@ if(current_user_can( 'edit_post', $_GET['post'] )):
         <input type="submit" name="submit_form" value="<?php esc_attr_e( 'Submit', 'mv-translations' ); ?>" />
     </form>
     <br>
-    <a href="<?= esc_url( home_url( '/submit-translation' )); ?>"><?php esc_html_e( 'Back to translations list', 'mv-translations' ); ?></a>
+    <a href="<?php echo esc_url( home_url( '/submit-translation' ) ); ?>"><?php esc_html_e( 'Back to translations list', 'mv-translations' ); ?></a>
 </div>
 <?php endif; ?>
-
 <script>
-    if (window.history.replaceState) {
-        window.history.replaceState(null, null, window.location.href);
-    }
+if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
 </script>
